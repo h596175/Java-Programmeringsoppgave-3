@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.util.Scanner;
 
 import no.hvl.dat100.jplab11.common.TODO;
@@ -21,8 +22,38 @@ public class LesBlogg {
 	private static String BILDE = "BILDE";
 
 	public static Blogg les(String mappe, String filnavn) {
-
-		throw new UnsupportedOperationException(TODO.method());
-
+		
+			Blogg nyBlogg = null;
+			int antInn;
+			
+			 
+		try {
+			FileReader fil = new FileReader(mappe+filnavn);
+			BufferedReader reader = new BufferedReader(fil);
+			
+			antInn = Integer.parseInt(reader.readLine());
+			nyBlogg = new Blogg(antInn);
+			
+			while((TEKST = reader.readLine()) != "BILDE") {
+				TEKST += reader.readLine();
+				
+			}
+			
+			while((BILDE = reader.readLine()) != null) {
+				BILDE += reader.readLine();
+			
+			}
+		
+			reader.close();
+				
+		} catch (FileNotFoundException e) {
+		
+			e.printStackTrace();
+			
+		} catch(IOException f) {
+			
+			f.printStackTrace();
+		}
+		return nyBlogg;
 	}
 }
